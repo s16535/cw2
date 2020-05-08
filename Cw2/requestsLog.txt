@@ -1,0 +1,48 @@
+Scieżka: /weatherforecast
+Zapytanie: 
+Metoda: GET
+Body: 
+
+Scieżka: /favicon.ico
+Zapytanie: 
+Metoda: GET
+Body: 
+
+Scieżka: /api/students
+Zapytanie: 
+Metoda: GET
+Body: 
+
+Scieżka: /api/enrollments
+Zapytanie: 
+Metoda: POST
+Body: {
+"IndexNumber": "s16535",
+"FirstName": "janusz",
+"LastName": "Kuciak",
+"BirthDate": "20.07.1983",
+"Studies": "INFORMATYKA"
+}
+
+Scieżka: /api/enrollments
+Zapytanie: 
+Metoda: POST
+Body: {
+"IndexNumber": "s16536",
+"FirstName": "janusz",
+"LastName": "Kuciak",
+"BirthDate": "20.07.1983",
+"Studies": "INFORMATYKA"
+}
+
+Scieżka: /api/enrollments
+Zapytanie: 
+Metoda: POST
+Body: {
+"IndexNumber": "s16536",
+"FirstName": "janusz",
+"LastName": "Kuciak",
+"BirthDate": "20.07.1983",
+"Studies": "INFORMATYKA"
+}
+
