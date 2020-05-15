@@ -46,3 +46,218 @@ Body: {
 "Studies": "INFORMATYKA"
 }
 
+Scieżka: /weatherforecast
+Zapytanie: 
+Metoda: GET
+Body: 
+
+Scieżka: /api/enrollments
+Zapytanie: 
+Metoda: POST
+Body: {
+"IndexNumber": "s1234",
+"FirstName": "ANDRZEJ",
+"LastName": "MALEWSKI",
+"BirthDate": "20.07.1983",
+"Studies": "INFORMATYKA"
+}
+
+Scieżka: /api/enrollments
+Zapytanie: 
+Metoda: POST
+Body: {
+"IndexNumber": "s1234",
+"FirstName": "ANDRZEJ",
+"LastName": "MALEWSKI",
+"BirthDate": "20.07.1983",
+"Studies": "INFORMATYKA"
+}
+
+Scieżka: /weatherforecast
+Zapytanie: 
+Metoda: GET
+Body: 
+
+Scieżka: /favicon.ico
+Zapytanie: 
+Metoda: GET
+Body: 
+
+Scieżka: /api/enrollments
+Zapytanie: 
+Metoda: POST
+Body: {
+"IndexNumber": "s1234",
+"FirstName": "ANDRZEJ",
+"LastName": "MALEWSKI",
+"BirthDate": "20.07.1983",
+"Studies": "INFORMATYKA"
+}
+
+Scieżka: /weatherforecast
+Zapytanie: 
+Metoda: GET
+Body: 
+
+Scieżka: /favicon.ico
+Zapytanie: 
+Metoda: GET
+Body: 
+
+Scieżka: /api/enrollments
+Zapytanie: 
+Metoda: POST
+Body: {
+"IndexNumber": "s1234",
+"FirstName": "ANDRZEJ",
+"LastName": "MALEWSKI",
+"BirthDate": "20.07.1983",
+"Studies": "INFORMATYKA"
+}
+
+Scieżka: /weatherforecast
+Zapytanie: 
+Metoda: GET
+Body: 
+
+Scieżka: /api/enrollments
+Zapytanie: 
+Metoda: POST
+Body: {
+"IndexNumber": "s1234",
+"FirstName": "ANDRZEJ",
+"LastName": "MALEWSKI",
+"BirthDate": "20.07.1983",
+"Studies": "INFORMATYKA"
+}
+
+Scieżka: /api/enrollments
+Zapytanie: 
+Metoda: POST
+Body: {
+"IndexNumber": "s1234",
+"FirstName": "ANDRZEJ",
+"LastName": "MALEWSKI",
+"BirthDate": "20.07.1983",
+"Studies": "INFORMATYKA"
+}
+
+Scieżka: /api/enrollments
+Zapytanie: 
+Metoda: POST
+Body: {
+"IndexNumber": "s1234",
+"FirstName": "ANDRZEJ",
+"LastName": "MALEWSKI",
+"BirthDate": "20.07.1983",
+"Studies": "INFORMATYKA"
+}
+
+Scieżka: /api/enrollments
+Zapytanie: 
+Metoda: POST
+Body: {
+"IndexNumber": "s12345",
+"FirstName": "JOANNA",
+"LastName": "BOLSKA",
+"BirthDate": "20.07.1993",
+"Studies": "NOWE KUPY"
+}
+
+Scieżka: /api/enrollments
+Zapytanie: 
+Metoda: POST
+Body: {
+"IndexNumber": "s12345",
+"FirstName": "JOANNA",
+"LastName": "BOLSKA",
+"BirthDate": "20.07.1993",
+"Studies": "NOWE KUPY"
+}
+
+Scieżka: /api/enrollments
+Zapytanie: 
+Metoda: POST
+Body: {
+"IndexNumber": "s12345",
+"FirstName": "JOANNA",
+"LastName": "BOLSKA",
+"BirthDate": "20.07.1993",
+"Studies": "NOWE MEDIA"
+}
+
+Scieżka: /weatherforecast
+Zapytanie: 
+Metoda: GET
+Body: 
+
+Scieżka: /api/enrollments
+Zapytanie: 
+Metoda: POST
+Body: {
+"IndexNumber": "s12345",
+"FirstName": "JOANNA",
+"LastName": "BOLSKA",
+"BirthDate": "20.07.1993",
+"Studies": "NOWE ..."
+}
+
+Scieżka: /api/enrollments
+Zapytanie: 
+Metoda: POST
+Body: {
+"IndexNumber": "s12345",
+"FirstName": "JOANNA",
+"LastName": "BOLSKA",
+"BirthDate": "20.07.1993",
+"Studies": "NOWE ..."
+}
+
+Scieżka: /api/students
+Zapytanie: 
+Metoda: GET
+Body: 
+
+Scieżka: /api/enrollments
+Zapytanie: 
+Metoda: POST
+Body: {
+"IndexNumber": "s12345",
+"FirstName": "JOANNA",
+"LastName": "BOLSKA",
+"BirthDate": "20.07.1993",
+"Studies": "NOWE BUTY"
+}
+
+Scieżka: /weatherforecast
+Zapytanie: 
+Metoda: GET
+Body: 
+
+Scieżka: /api/enrollments
+Zapytanie: 
+Metoda: POST
+Body: {
+"IndexNumber": "s12345",
+"FirstName": "JOANNA",
+"LastName": "BOLSKA",
+"BirthDate": "20.07.1993",
+"Studies": "NOWE BUTY"
+}
+
+Scieżka: /weatherforecast
+Zapytanie: 
+Metoda: GET
+Body: 
+
+Scieżka: /api/enrollments
+Zapytanie: 
+Metoda: POST
+Body: {
+"IndexNumber": "s12345",
+"FirstName": "JOANNA",
+"LastName": "BOLSKA",
+"BirthDate": "20.07.1993",
+"Studies": "NOWE BUTY"
+}
+

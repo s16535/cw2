@@ -152,6 +152,37 @@ namespace Cw2.Services
                     com.Parameters.Clear();
                     com.CommandType = CommandType.StoredProcedure;
                     com.CommandText = "dbo.PromoteStudentsProcedure";
+
+//PROCEDURA SKŁADOWANA ZAPISANA NA BAZIE DANYCH
+
+/*ALTER PROCEDURE[dbo].[PromoteStudentsProcedure] @Studies NVARCHAR(100), @Semester INT
+AS
+BEGIN
+
+    SET XACT_ABORT ON;
+    BEGIN TRAN
+
+    DECLARE @IdStudies INT = (SELECT IdStudy FROM Studies WHERE Name = @Studies);
+    IF @IdStudies IS NULL
+        BEGIN
+            RAISERROR('Given studies NOT FOUND', 9, 1);
+            RETURN;
+        END
+    DECLARE @IdEnrollment INT = (SELECT IdEnrollment FROM Enrollment e JOIN Studies s ON(e.IdStudy= s.IdStudy) WHERE e.Semester = (@Semester + 1) AND s.Name = @Studies);
+
+    IF @IdEnrollment IS NULL
+
+        BEGIN
+            SET @IdEnrollment = (SELECT(MAX(IdEnrollment) + 1) FROM Enrollment);
+            INSERT INTO Enrollment(IdEnrollment, Semester, IdStudy, StartDate) VALUES(@IdEnrollment, @Semester + 1, @IdStudies, CURRENT_TIMESTAMP)
+        END
+
+    UPDATE Student SET IdEnrollment = @IdEnrollment WHERE IdEnrollment =
+    (SELECT IdEnrollment FROM Enrollment e JOIN Studies s ON(e.IdStudy= s.IdStudy) WHERE e.Semester = @Semester AND s.Name = @Studies);
+
+    COMMIT
+END*/
+
                     com.Parameters.Add(new SqlParameter("@Studies", request.Studies));
                     com.Parameters.Add(new SqlParameter("@Semester", request.Semester));
 
@@ -188,7 +219,7 @@ namespace Cw2.Services
                     dr.Close();
                     return new Response("400 Bad Request", "Student o podanym indeksie nie istnieje!");
                 }
-                else 
+                else
                 {
                     return new Response("200 Ok", "Student o podanym indeksie istnieje!");
                 }
