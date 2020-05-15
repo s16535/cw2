@@ -40,36 +40,37 @@ namespace Cw2.Services
                         tran.Rollback();
                         return new Response("400 Bad Request", "Studia nie istnieją!");
                     }
-                    int idstudies = (int)dr["IdStudy"];
+                    int idStudy = (int)dr["IdStudy"];
 
                     dr.Close();
 
-                    com.CommandText = "SELECT IdEnrollment FROM Enrollment WHERE IdStudy=@idstudies and semester=1";
-                    com.Parameters.AddWithValue("idstudies", idstudies);
+                    com.CommandText = "SELECT IdEnrollment FROM Enrollment WHERE IdStudy=@idStudy and semester=1";
+                    com.Parameters.AddWithValue("idStudy", idStudy);
+
+                    int idEnrollment;
 
                     com.Transaction = tran;
                     dr = com.ExecuteReader();
-                    if (!dr.Read())
+                    if (dr.Read())
+                    {
+                        idEnrollment = (int)dr["idEnrollment"];
+                        dr.Close();
+                    }
+                    else
                     {
                         dr.Close();
-                        com.CommandText = "INSERT INTO Enrollment(Semester, IdStudy, StartDate) VALUES (@semester, @idstudy, @startdate)";
-                        com.Parameters.AddWithValue("semester", 1);
-                        com.Parameters.AddWithValue("idstudy", idstudies);
-                        com.Parameters.AddWithValue("startdate", currentDate);
-
+                        com.CommandText = "INSERT INTO Enrollment VALUES ((SELECT MAX(idEnrollment) + 1 FROM Enrollment), 1, @idStudy, getDate())";
                         com.Transaction = tran;
                         com.ExecuteNonQuery();
-
                         dr.Close();
-                        com.CommandText = "SELECT IdEnrollment FROM Enrollment WHERE IdStudy=@idstudies AND semester=1";
-                        com.Parameters.AddWithValue("idstudies", idstudies);
+
+                        com.CommandText = "SELECT idEnrollment FROM enrollment WHERE semester = 1 and idStudy = @idStudy";
                         com.Transaction = tran;
                         dr = com.ExecuteReader();
+                        dr.Read();
+                        idEnrollment = (int)dr["idEnrollment"];
+                        dr.Close();
                     }
-
-                    int idenrollment = (int)dr["IdEnrollment"];
-
-                    dr.Close();
                     com.CommandText = "SELECT IndexNumber FROM Student WHERE IndexNumber = @index";
                     com.Parameters.AddWithValue("index", request.IndexNumber);
 
@@ -89,7 +90,7 @@ namespace Cw2.Services
                     com.Parameters.AddWithValue("fname", request.FirstName);
                     com.Parameters.AddWithValue("lname", request.LastName);
                     com.Parameters.AddWithValue("bdate", convertedDate);
-                    com.Parameters.AddWithValue("idenrollment", idenrollment);
+                    com.Parameters.AddWithValue("idenrollment", idEnrollment);
 
                     com.ExecuteNonQuery();
 
