@@ -3,6 +3,14 @@ using Cw2.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using Cw2.Services;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
+using Cw2.DTO.Requests;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Text;
+using Microsoft.Extensions.Configuration;
+using System;
 
 namespace Cw2.Controllers
 {
@@ -10,14 +18,15 @@ namespace Cw2.Controllers
     [Route("api/students")]
     public class StudentsController : ControllerBase
     {
-        private readonly IStudentDbService _dbService;
-
-        public StudentsController(IStudentDbService dbService)
+        //private readonly IStudentDbService _dbService;
+        public IConfiguration Configuration { get; set; }
+/*        public StudentsController(IStudentDbService dbService)
         {
             _dbService = dbService;
-        }
+        }*/
 
         [HttpGet]
+        [Authorize]
         public IActionResult GetStudents(string orderBy)
         {
             List<Student> studentsList = new List<Student>();
@@ -46,6 +55,34 @@ namespace Cw2.Controllers
             return Ok(studentsList);
         }
 
+        [HttpPost]
+        public IActionResult Login(LoginRequest request)
+        {
+            var claims = new[]
+{
+                new Claim(ClaimTypes.NameIdentifier, "1"),
+                new Claim(ClaimTypes.Name, "jan123"),
+                new Claim(ClaimTypes.Role, "admin"),
+                new Claim(ClaimTypes.Role, "student")
+            };
 
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["SecretKey"]));
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+            var token = new JwtSecurityToken
+            (
+                issuer: "Gakko",
+                audience: "Students",
+                claims: claims,
+                expires: DateTime.Now.AddMinutes(10),
+                signingCredentials: creds
+            );
+
+            return Ok(new
+            {
+                token = new JwtSecurityTokenHandler().WriteToken(token),
+                refreshToken = Guid.NewGuid()
+            });
+        }
     }
 }

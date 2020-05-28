@@ -3,6 +3,7 @@
 using Cw2.Models;
 using Cw2.Services;
 using Cw2.DTO;
+using Microsoft.AspNetCore.Authorization;
 
 namespace cw2.Controllers
 {
@@ -18,6 +19,7 @@ namespace cw2.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "employee")]
         public IActionResult EnrollStudent(EnrollStudentRequest request)
         {
             var response = _service.EnrollStudent(request);
@@ -30,6 +32,7 @@ namespace cw2.Controllers
         }
 
         [HttpPost("{promotions}")]
+        [Authorize(Roles = "employee")]
         public IActionResult PromoteStudent(PromoteStudentRequest request)
         {
             var response = _service.PromoteStudents(request);

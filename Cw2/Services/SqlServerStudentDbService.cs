@@ -1,4 +1,5 @@
 ﻿using Cw2.DTO;
+using Cw2.DTO.Requests;
 using Cw2.Models;
 using System;
 using System.Data;
@@ -223,6 +224,120 @@ END*/
                 else
                 {
                     return new Response("200 Ok", "Student o podanym indeksie istnieje!");
+                }
+            }
+        }
+
+        public Response CheckCredentials(LoginRequest loginRequest)
+        {
+            using (var con = new SqlConnection(ConnectionString))
+            using (var com = new SqlCommand())
+            {
+                com.Connection = con;
+                con.Open();
+
+                try
+                {
+                    com.CommandText = "SELECT 1 FROM Student WHERE IndexNumber = @indexNr AND Password = @haslo";
+                    com.Parameters.AddWithValue("indexNr", loginRequest.Login);
+                    com.Parameters.AddWithValue("haslo", loginRequest.Haslo);
+                    var dr = com.ExecuteReader();
+                    if (!dr.Read())
+                    {
+                        return new Response("401 Unauthorised", "Błędne hasło!");
+                    }
+                    else
+                    {
+                        return new Response("200 Ok", "Student uwierzytelniony!");
+                    }
+                }
+                catch (Exception exception)
+                {
+                    return new Response("401 Bad Request", "Student o podanym indeksie nie istnieje!");
+                }
+            }
+        }
+
+        public bool IsTokenAuth(string token)
+        {
+            using (var con = new SqlConnection(ConnectionString))
+            using (var com = new SqlCommand())
+            {
+                com.Connection = con;
+                con.Open();
+
+                try
+                {
+                    com.CommandText = "SELECT 1 FROM Student WHERE Token=@token";
+                    com.Parameters.AddWithValue("token", token);
+
+                    using (var dr = com.ExecuteReader())
+                    {
+                        if (!dr.Read())
+                        {
+                            return false;
+                        }
+
+                        return true;
+                    }
+                }
+                catch (Exception e)
+                {
+                    throw new Exception("Request process exception!");
+                }
+            }
+        }
+
+        public void SaveToken(SaveTokenRequest request)
+        {
+            using (var con = new SqlConnection(ConnectionString))
+            using (var com = new SqlCommand())
+            {
+                com.Connection = con;
+                con.Open();
+                var tran = con.BeginTransaction();
+                com.Transaction = tran;
+
+                try
+                {
+                    com.CommandText = "UPDATE Student SET Token=@token WHERE IndexNumber=@indexNumber";
+                    com.Parameters.AddWithValue("token", request.Token);
+                    com.Parameters.AddWithValue("indexNumber", request.IndexNumber);
+
+                    com.ExecuteNonQuery();
+                    tran.Commit();
+                }
+                catch (Exception e)
+                {
+                    tran.Rollback();
+                    throw new Exception("Nie udalo sie przetworzyc zadania");
+                }
+            }
+        }
+
+        public void SaveToken(string previousToken, string token)
+        {
+            using (var con = new SqlConnection(ConnectionString))
+            using (var com = new SqlCommand())
+            {
+                com.Connection = con;
+                con.Open();
+                var tran = con.BeginTransaction();
+                com.Transaction = tran;
+
+                try
+                {
+                    com.CommandText = "UPDATE Student SET Token=@token WHERE RefToken=@previousToken";
+                    com.Parameters.AddWithValue("token", token);
+                    com.Parameters.AddWithValue("previousToken", previousToken);
+
+                    com.ExecuteNonQuery();
+                    tran.Commit();
+                }
+                catch (Exception e)
+                {
+                    tran.Rollback();
+                    throw new Exception("Nie udalo sie przetworzyc zadania");
                 }
             }
         }
