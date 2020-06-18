@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Cw2.Models
 {
-    public class Enrollment
+    public partial class Enrollment
     {
-        public string Semester { get; set; }
-        public string StartDate { get; set; }
+        public int IdEnrollment { get; set; }
+        public int Semester { get; set; }
+        public int IdStudy { get; set; }
+        public DateTime StartDate { get; set; }
+
+        public virtual Studies IdStudyNavigation { get; set; }
     }
 }

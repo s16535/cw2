@@ -17,6 +17,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
+using Cw2.Models;
 
 namespace Cw2
 {
@@ -32,31 +33,32 @@ namespace Cw2
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-        /*            services.AddScoped<IStudentDbService, SqlServerStudentDbService>();
-                    services.AddControllers();
-                    services.AddSwaggerGen(config =>
-                    {
-                        config.SwaggerDoc("v1", new OpenApiInfo { Title = "Students App API", Version = "v1" });
+            /*            services.AddScoped<IStudentDbService, SqlServerStudentDbService>();
+                        services.AddControllers();
+                        services.AddSwaggerGen(config =>
+                        {
+                            config.SwaggerDoc("v1", new OpenApiInfo { Title = "Students App API", Version = "v1" });
 
+                        });*/
+
+            /*        services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                    .AddJwtBearer(options =>
+                    {
+                        options.TokenValidationParameters = new TokenValidationParameters
+                        {
+                            ValidateIssuer = true,
+                            ValidateAudience = true,
+                            ValidateLifetime = true,
+                            ValidIssuer = "Gakko",
+                            ValidAudience = "Students",
+                            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["SecretKey"]))
+                        };
                     });*/
 
-/*        services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-        .AddJwtBearer(options =>
-        {
-            options.TokenValidationParameters = new TokenValidationParameters
-            {
-                ValidateIssuer = true,
-                ValidateAudience = true,
-                ValidateLifetime = true,
-                ValidIssuer = "Gakko",
-                ValidAudience = "Students",
-                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["SecretKey"]))
-            };
-        });*/
+            /*services.AddAuthentication("AuthenticationBasic")
+                    .AddScheme<AuthenticationSchemeOptions, BasicAuthHandler>("AuthenticationBasic", null);*/
 
-            services.AddAuthentication("AuthenticationBasic")
-                  .AddScheme<AuthenticationSchemeOptions, BasicAuthHandler>("AuthenticationBasic", null);
-
+            services.AddDbContext<s16535Context>();
             services.AddControllers()
                     .AddXmlSerializerFormatters();
 
